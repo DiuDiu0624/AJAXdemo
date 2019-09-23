@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../JS/01-封装.js"></script>
+    <style>
+        input {
+            width: 300px;
+            height: 30px;
+            padding: 0 8px;
+        }
+
+        button {
+            height: 30px;
+            width: 80px;
+            margin-left: 10px;
+            background-color:pink;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            width: 800px;
+        }
+
+        li {
+            width: 120px;
+            float: left;
+            margin-left: 30px;
+        }
+
+        p {
+            font-size: 14px;
+            
+        }
+
+        span {
+            font-size: 16px;
+            display: block;
+            width: 100px;
+            margin-top: 15px;
+        }
+
+        b {
+            display: block;
+            width: 100px;
+            margin-top: 20px;
+        }
+        h3{
+            color: #666;
+            font-size: 20px;
+        }
+        img{
+            width: 80px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <label for="">请输入城市名字：</label>
+    <input type="text">
+    <button>查询</button>
+    <ul>
+       
+    </ul>
+    <script>
+        document.querySelector("button").onclick = function () {
+            var oul = document.querySelector("ul");
+            var city = document.querySelector("input").value;
+            var url = "http://localhost:8088?myUrl=http://apis.juhe.cn/simpleWeather/query";
+            var prams = "city=" + city + "&key=ea3894524d645697b4442d519c193c8a";
+            AJAX('get', url, function (data) {
+                var datas = JSON.parse(data);
+                console.log(datas.result.future);
+                var h3 = document.createElement("h3");
+                h3.innerHTML=city;
+                oul.appendChild(h3); 
+                oul.innerHTML = "";
+                for (i in datas.result.future) {
+                    var lis = document.createElement("li");
+                    oul.appendChild(lis); 
+                    var p = document.createElement("p");
+                    p.innerHTML = datas.result.future[i].date;
+                    lis.appendChild(p);
+                    var b = document.createElement("b");
+                    b.innerHTML = datas.result.future[i].weather;
+                    lis.appendChild(b);
+                   var pic = document.createElement("img");
+                   pic.src = "images/"+datas.result.future[i].weather+".jpg";
+                   lis.appendChild(pic);
+                    var span = document.createElement("span");
+                   span.innerHTML = datas.result.future[i].temperature;
+                    lis.appendChild(span);
+                    var span1 = document.createElement("span");
+                   span1.innerHTML = datas.result.future[i].direct;
+                    lis.appendChild(span1);
+                }
+
+            }, prams);
+        }
+    </script>
+</body>
+
+</html>

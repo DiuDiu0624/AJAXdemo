@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- jsonp -->
+    <!-- <script src="http://localhost:8088"></script> -->
+
+    <button onclick="getData()">get</button>
+    <script>
+        function getData(){
+            let JSOP=document.createElement('script');
+            // JSOP.src="http://localhost:8088?callback=fn";
+            // JSOP.src="http://localhost:8088?callback=fnn";
+            // JSOP.src="http://cache.video.iqiyi.com/jp/avlist/202861101/1/?callback=jsonp9";            
+            // JSOP.src="http://suggest.taobao.com/sug?code=utf-8&q=鞋子&callback=cb";
+            JSOP.src="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=java&code=utf-8&json=1&p=3&req=2&cb=fn";
+            document.body.append(JSOP);
+        }
+
+        //函数
+        function fn(data){
+            console.log('hello。。。。。');
+            console.log(data);
+        }
+        
+    </script>
+</body>
+</html>

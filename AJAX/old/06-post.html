@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="JS/01-封装.js"></script>
+</head>
+<body>
+        <form action="">
+                <label for="">用户名：</label><input type="text" id="txt-name"><br>
+                <label for="">密码：</label><input type="password" id="txt-pwd"><br>
+                <input type="submit" value="登录">
+            </form>
+            <div id="result"></div>
+            <script>
+                document.forms[0].onsubmit = function () {
+            var uname = document.getElementById("txt-name").value;
+            var upwd = document.getElementById("txt-pwd").value;
+            var url = 'http://localhost:3000';
+            var prams = "username=" + uname + "&pwd=" + upwd;
+            var xhr = AJAX('post', url, function () {
+
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(data);
+                    if(data.code===0){
+                        document.getElementById('result').innerHTML=data.msg;
+                    }else{
+                        document.getElementById('result').innerHTML=data.msg;
+                    }
+
+                }
+            }, prams);
+            return false;
+        }
+            </script>
+</body>
+</html>

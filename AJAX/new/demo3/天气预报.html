@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/天气预报.css">
+    <!-- <script src="../../JS/jquery.js"></script> -->
+    <script src="../../JS/axios.min.js"></script>
+
+ 
+</head>
+
+<body>
+    <div>
+    <label for="">请输入城市名字：</label>
+    <input type="text">
+    <button>查询</button>
+    <ul>
+
+    </ul>
+</div>
+    <script>
+        document.querySelector("button").onclick = function () {
+            var oul = document.querySelector("ul");
+            var city = document.querySelector("input").value;
+            axios({
+                method:"get",
+                url:`http://localhost:8088?myUrl=http://apis.juhe.cn/simpleWeather/query?city=${city}&key=ea3894524d645697b4442d519c193c8a`
+            })
+            .then(data=>{
+                console.log(data.data);
+                var datas=data.data;
+                console.log(datas.result.future);
+                var h3 = document.createElement("h3");
+                h3.innerHTML=city;
+                oul.appendChild(h3); 
+                oul.innerHTML = "";
+                for (i in datas.result.future) {
+                    var lis = document.createElement("li");
+                    oul.appendChild(lis); 
+                    var p = document.createElement("p");
+                    p.innerHTML = datas.result.future[i].date;
+                    lis.appendChild(p);
+                    var b = document.createElement("b");
+                    b.innerHTML = datas.result.future[i].weather;
+                    lis.appendChild(b);
+                   var pic = document.createElement("img");
+                   pic.src = "images/"+datas.result.future[i].weather+".jpg";
+                   lis.appendChild(pic);
+                    var span = document.createElement("span");
+                   span.innerHTML = datas.result.future[i].temperature;
+                    lis.appendChild(span);
+                    var span1 = document.createElement("span");
+                   span1.innerHTML = datas.result.future[i].direct;
+                    lis.appendChild(span1);
+                }
+            })
+
+
+            // $.ajax({
+            //     type: "GET",
+            //     url: "http://apis.juhe.cn/simpleWeather/query",
+            //     data: { city: `${city}`, key:'ea3894524d645697b4442d519c193c8a' },
+            //     dataType: "jsonp",
+            //     success: function (msg) {
+            //         console.log(msg);
+
+            //     }
+            // })
+
+        }
+       
+    </script>
+</body>
+
+</html>

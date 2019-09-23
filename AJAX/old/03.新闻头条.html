@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+            height: 240px;
+        }
+
+        ul li {
+            width: 1200px;
+            margin: 0 auto;
+            float: left;
+            margin-top: 20px;
+            height: 240px;
+        }
+
+        h3 {
+            float: left;
+            margin-left: 50px;
+            display: block;
+            width: 250px;
+            height: 60px;
+        }
+
+        img {
+            float: left;
+        }
+
+        a {
+            display: block;
+            width:700px;
+            margin-left: 100px;
+            float: left;
+        }
+
+        span {
+            float: right;
+            font-size: 16px;
+            display: block;
+            width: 200px;
+            height: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+
+    </ul>
+    <script>
+        var Oul = document.querySelector("ul");
+        var xml = new XMLHttpRequest;
+        var url = "http://localhost:8088?myUrl=http://v.juhe.cn/toutiao/index?type=top&key=74371a0f83d5fda488c1237ebea15ba7 "
+        xml.open("get", url, true);
+        xml.onreadystatechange = function () {
+            if (xml.readyState === 4 && xml.status === 200) {
+
+                var obj = JSON.parse(xml.responseText);
+                console.log(obj);
+                for (var i = 0; i < obj.result.data.length; i++) {
+                    var lis = document.createElement("li");
+                    Oul.appendChild(lis);
+                    var pic = document.createElement("img");
+                    pic.src = obj.result.data[i].thumbnail_pic_s;
+                    lis.appendChild(pic);
+                    var bt = document.createElement("h3");
+                    bt.innerHTML = obj.result.data[i].author_name;
+                    lis.appendChild(bt);
+                    var tm = document.createElement("span");
+                    tm.innerHTML = obj.result.data[i].date;
+                    lis.appendChild(tm);
+                    var contain = document.createElement("a");
+                    contain.href = obj.result.data[i].url;
+                    contain.innerHTML = obj.result.data[i].title;
+                    lis.appendChild(contain);
+                }
+            }
+        }
+        xml.send(null);
+    </script>
+</body>
+
+</html>

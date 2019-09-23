@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/手机号.css">
+    <script src="../../JS/jquery.js"></script>
+
+</head>
+
+<body>
+    <div class="til">
+        请输入要查询的手机号：<input type="text" name="" id="ip"></br>
+        <button>确定</button>
+    </div>
+    <div class="bom">
+        <ul>
+
+        </ul>
+    </div>
+    <script>
+        document.querySelector("button").onclick = function () {
+          var oul = document.querySelector("ul");
+        
+            var ip = document.getElementById("ip").value.trim();
+            $.ajax({
+                type: "GET",
+                url: "http://apis.juhe.cn/mobile/get",
+                data: { phone: `${ip}`, key: '8dcd892265ac7eaf4c5692736f77a85e' },
+                dataType: "jsonp",
+                success: function (msg) {
+                    console.log(msg.result);
+                    oul.innerHTML="";
+                    for (i in msg.result) {
+                        // console.log(msg.result)
+                        var lis = document.createElement("li");
+                        oul.appendChild(lis);
+                        lis.innerHTML=msg.result[i];
+                    }
+
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+
+    </ul>
+    <script>
+        var Oul = document.querySelector("ul");
+        var xml = new XMLHttpRequest();
+        var url = " http://localhost:8088?myUrl=http://v.juhe.cn/joke/content/list.php?key=059fb0ac110717ad3f217966d97fb0e1&page=2&pagesize=20&sort=asc&time=1418745237";
+        xml.open("get", url, true);
+        xml.onreadystatechange = function () {
+            if (xml.readyState === 4 && xml.status === 200) {
+                var obj = JSON.parse(xml.responseText);
+                console.log(obj);
+                for (var i = 0; i < obj.result.data.length; i++) {
+                    var li = document.createElement("li");
+                    li.innerHTML = obj.result.data[i].content;
+                    var bt = document.createElement("h2");
+                    bt.innerHTML = obj.result.data[i].updatetime;
+                    Oul.appendChild(bt);
+                    Oul.appendChild(li);
+                }
+            }
+        }
+        xml.send(null);
+    </script>
+</body>
+
+</html>

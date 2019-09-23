@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+   
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+            width: 1100px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        li {
+            width: 200px;
+            float: left;
+            margin-left: 30px;
+            margin-top: 20px;
+            border: #666 solid 1px;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;  
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 16px;
+            margin-top: 10px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        span {
+            font-size: 14px;
+            display: block;
+            width: 150px;
+            margin-top: 20px;
+            color: #666;
+            margin: 0 auto;
+            line-height: 20px;
+
+            
+        }
+        img{
+            padding-top: 5px;
+        }
+       
+    </style>
+</head>
+
+<body>
+    <ul>
+        <!-- <li>
+            <img src="http://pic9.iqiyipic.com/image/20150803/96/f9/v_109343020_m_601.jpg" alt="">
+            <a href="">
+                <h3>航海王 第一季</h3><span>我是路飞！ 将要成为海贼王的男人</span>
+            </a>
+
+        </li>
+        <li>
+                <img src="http://pic9.iqiyipic.com/image/20150803/96/f9/v_109343020_m_601.jpg" alt="">
+                <a href="">
+                    <h3>航海王 第一季</h3><span>我是路飞！ 将要成为海贼王的男人</span>
+                </a>
+    
+            </li> -->
+    </ul>
+    <script>
+        var oul = document.querySelector("ul");
+        function fn(data) {
+            console.log(data.data);
+            for (i in data.data.vlist) {
+                // console.log(data.data.vlist[i].shortTitle);
+                var lis = document.createElement("li");
+                oul.appendChild(lis);
+                var pic = document.createElement("img");
+                pic.src = data.data.vlist[i].vpic;
+                lis.appendChild(pic);
+                var as = document.createElement("a");
+                as.href =  data.data.vlist[i].vurl;
+                lis.appendChild(as);
+                var h3 = document.createElement("h3");
+                h3.innerHTML = data.data.vlist[i].shortTitle;
+                as.appendChild(h3);
+                var span = document.createElement("span");
+                span.innerHTML = data.data.vlist[i].vt;
+                as.appendChild(span);
+
+            }
+        }
+    </script>
+    <script src="http://cache.video.iqiyi.com/jp/avlist/202861101/1/?callback=fn"></script>
+   
+</body>
+
+</html>

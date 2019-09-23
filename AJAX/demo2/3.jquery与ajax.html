@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="getData()">GET</button>
+    <button onclick="postData()">POST</button>
+    <script src="lib/jquery.min.js"></script>
+    <script>
+        let baseUrl="http://localhost:5000";
+        function getData(){
+            // $.ajax(baseUrl,{
+            //     //成功时回调
+            //     success:function(data){
+            //         console.log(data);
+            //     },
+            //     //失败时回调
+            //     error:function(err){
+            //         console.log(err);
+            //     }
+            // });
+
+            //get 有参数
+            $.ajax({
+                type:"GET",
+                url:baseUrl,
+                data:"username=jack",
+                success:function(data){
+                    console.log(data);
+                }
+            });
+        }
+
+//post
+        function postData(){
+            // $.ajax({
+            //     type:"POST",
+            //     url:baseUrl,
+            //     success:function(data){
+            //         console.log(data);
+            //     }
+            // });
+
+           var nn= $.ajax({
+                type:"POST",
+                url:`${baseUrl}/login`,
+                data:"username=jack",
+                success:function(data){
+                    console.log(data);
+                }
+            });
+
+        }
+    </script>
+</body>
+</html>

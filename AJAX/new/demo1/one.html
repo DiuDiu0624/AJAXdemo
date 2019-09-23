@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../new/封装.js"></script>
+</head>
+
+<body>
+    姓名：<input type="text" id="Name"></br>
+    密码：<input type="password" id="pwd"></br>
+    <button id="btn">确定</button>
+
+    <script>
+
+        document.getElementById("btn").onclick = function () {
+            let Name = document.getElementById("Name").value.trim();
+            let pwd = document.getElementById("pwd").value.trim();
+            let url = "http://localhost:5000";
+            let parms =`username=${Name}&pwd=${pwd}`
+           getdata('get',url,parms);
+        }
+    </script>
+</body>
+
+</html>

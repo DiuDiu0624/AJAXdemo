@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <label>用户名：</label></label><input type="text" id="txtName"><br>
+        <label for="">密码：</label><input type="password" id="txtPwd"><br>
+        <button>登录</button>
+
+        <script>
+                var oName=document.querySelector('#txtName');
+                var oPwd=document.querySelector('#txtPwd');
+                document.querySelector('button').onclick=function(){
+                    //
+                    let url="http://localhost:5000/login";
+                    //请求参数
+                    let parm=`username=${oName.value}&pwd=${oPwd.value}`;
+                    // let parm="username=jack";
+                    let xhr=new XMLHttpRequest();
+                  
+                    // xhr.open('POST',url,false);//同步
+                    xhr.open('POST',url,true);//异步
+                    // xhr.onreadystatechange=function(){
+                    //     if(xhr.readyState==4){
+                    //         console.log(xhr.responseText);
+                    //     }
+                    // };
+                    //添加头
+                    //注意：使用ajax发送带有参数的post请求，需要加header
+                    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');                                       
+                    // xhr.send(null);
+                    xhr.send(parm);
+                    xhr.onreadystatechange=function(){
+                        if(xhr.readyState==4){
+                            // console.log(xhr.responseText,typeof xhr.responseText);
+                            let obj=JSON.parse(xhr.responseText);
+                            console.log(obj,obj.name,obj.age);   
+                        }
+                    };
+
+                    console.log('end');
+                            
+                };
+            </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>天气预报</title>
+    <!-- <link rel="stylesheet" href="./css/date.css"> -->
+    <script src="../../JS/axios.min.js"></script>
+</head>
+
+<body>
+
+    <div id="box">
+        <div class="suosou">
+            <label for="">城市名称：</label><input type="text" placeholder="输入城市名"><button onclick="btn()">搜索</button>
+        </div>
+        <h2>苏州：</h2>
+        <ul>
+            <li>第一天</li>
+            <li>二天</li>
+            <li>三天</li>
+            <li>四天</li>
+            <li>五天</li>
+            <li>六天</li>
+        </ul>
+    </div>
+
+
+    <script>
+        let city = document.querySelector('input');
+        let url = `http://localhost:8088`;
+        // 按下回车  搜索
+        city.onkeyup = function (e) {
+            if (e.keyCode === 13) {
+                let cityValue = city.value.trim();
+                axios(
+                        {  method:"get",
+                            url:`${url}?myUrl=http://apis.juhe.cn/simpleWeather/query?url=city=${cityValue}&key=5ae83b3cac570158e70f65fd7a60decd`
+                        })
+                    .then(data => {
+                        console.log(data);
+                    }).catch(err => {
+                        console.log(err);
+                    })
+            }
+        }
+
+        // 点击按钮 搜索
+        function btn() {
+            let cityValue = city.value.trim();
+            axios({  method:"get",
+                    url:`${url}?url=http://apis.juhe.cn/simpleWeather/query?city=${cityValue}&key=5ae83b3cac570158e70f65fd7a60decd`})
+                .then(data => {
+                    console.log(data);
+                }).catch(err => {
+                    console.log(err);
+                })
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="ajax.js"></script>
+    <script>
+        //发起网络请求
+        // ajax();
+
+        // let url='http://localhost:5000';
+        let url='http://localhost:5000/login';
+        let data="username=tom&pwd=123456";
+
+        //get  无参
+
+        // ajax("GET",url);
+
+        //get 有参数
+        // ajax('GET',url,data);
+
+        //post  无参
+        // ajax('POST',url);
+
+        //post 有参数
+        // ajax('POST',url,function(res){
+        //     // console.log(res);
+        //     var person=JSON.parse(res);
+        //     document.querySelector('#box').innerHTML=`姓名：${person.name},年龄：${person.age}`;
+        // },data);
+
+
+        ajax('POST',url,data).then(function(data){
+            console.log(data);
+        });
+
+
+        /*
+            fetch(url).then()
+            fetch(url,{
+                method:"POST",
+                body:{},
+                headers:{},                
+            });
+
+            //实现封装
+        */
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+
+        //跨域
+
+        //ajax
+        /*
+            XMLHttpRequest对象
+                open(method,url)                打开链接
+                    method:  POST GET
+                    url:     服务器地址
+
+                send()                          发送(请求)
+                onreadystatechange  事件    
+
+        */
+    
+    // 1. 创建一个 XMLHttpRequest 类型的对象 —— 相当于打开了一个浏览器
+    var xhr = new XMLHttpRequest();
+    // xhr.onreadystatechange = function (data) {
+
+    // console.log(xhr.readyState);
+    // // 通过 xhr 的 readyState 判断此次请求的响应是否接收完成
+    // // if (this.readyState === 4) {
+    // // // 通过 xhr 的 responseText 获取到响应的响应体
+    // // // console.log(this)
+    // // console.log(xhr.responseText);
+    // // }
+    // }
+    // 2. 打开与一个网址之间的连接 —— 相当于在地址栏输入访问地址
+    xhr.open('GET', 'http://localhost:3000');
+    // 3. 通过连接发送一次请求 —— 相当于回车或者点击访问发送请求
+    // xhr.send(null);
+    xhr.send();
+    // 4. 指定 xhr 状态变化事件处理函数 —— 相当于处理网页呈现后的操作
+    xhr.onreadystatechange = function (data) {
+
+        // console.log(xhr.readyState);
+    // 通过 xhr 的 readyState 判断此次请求的响应是否接收完成
+         if (this.readyState === 4) {
+         // 通过 xhr 的 responseText 获取到响应的响应体
+         // console.log(this)
+        //  console.log(xhr.responseText);
+        console.log(new Date().toLocaleTimeString(),'收到服务器数据');
+         }
+    }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

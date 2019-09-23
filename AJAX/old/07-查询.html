@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        input {
+            width: 200px;
+            height: 38px;
+            margin: 30px;
+            padding: 0 10px;
+            font-size: 16px;
+            float: left;
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin-left: 30px;
+            width: 50px;
+            height: 30px;
+            float: left;
+            margin-top: 30px;
+        }
+
+        ul {
+            width: 300px;
+            margin-left: 30px;
+            list-style: none;
+            clear: both;
+        }
+
+        li {
+            line-height: 30px;
+
+        }
+    </style>
+    <script src="JS/01-封装.js"></script>
+</head>
+
+<body>
+    <input type="text">
+    <button>搜索</button>
+    <ul></ul>
+    <script>
+        var ul = document.getElementsByTagName("ul")[0];
+        var input = document.getElementsByTagName("input")[0];
+        input.onkeyup = function () {
+            var txtvul = input.value;
+            url = "http:localhost:4000";
+            prams = "name=" + txtvul;
+            ul.innerHTML = "";
+            var xhr = AJAX('get', url, function (data) {
+
+                var date = JSON.parse(data);
+                // console.log(date);
+               
+                for (var i = 0; i < date.data.length; i++) {
+                    // 文本框为空时，不添加li
+                    if (txtvul.trim() == "") {
+                        break;
+                    }
+                    var li = document.createElement("li")
+                    li.innerHTML = date.data[i].name;
+                    ul.appendChild(li);
+                }
+
+
+            }, prams);
+        //     var lis = document.querySelectorAll("li");
+        //     console.log(lis);
+        //     // 清空ul里的li;
+        //     for (var i = 0; i < lis.length; i++) {
+        //         ul.removeChild(lis[i]);                 // removeChild 只能删除指定的元素，不能删除集合；
+        //     }
+         }
+
+
+    </script>
+</body>
+
+</html>

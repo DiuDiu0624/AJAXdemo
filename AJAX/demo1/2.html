@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script></script>
+</head>
+<body>
+    <button>请求服务器</button>
+
+    <script>
+        document.querySelector('button').onclick=function(){
+            //1.创建XMLHTTP对象
+            var xhr=new XMLHttpRequest();
+            xhr.onreadystatechange=function(){
+                console.log(xhr.status,xhr.readyState);
+                if(xhr.readyState==2){
+                    document.write('正在加载。。。。。。');
+                }else if(xhr.readyState==4){
+                    document.write('收到服务器数据。。。。。');
+                }
+            };
+            //2.打开链接
+            xhr.open('GET',"http://localhost:4000");
+            //3.发送信息
+            xhr.send(null);
+            //4.监听状态改变
+            // xhr.onreadystatechange=function(){
+            //     if(xhr.readyState==2){
+            //         document.write('正在加载。。。。。。');
+            //     }else if(xhr.readyState==4){
+            //         document.write('收到服务器数据。。。。。');
+            //     }
+            // };
+        };
+    </script>
+</body>
+</html>

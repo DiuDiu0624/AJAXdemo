@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/jquery.min.js"></script>
+    <!-- <script src="lib/ajax.js"></script> -->
+</head>
+<body>
+    <button onclick="getData()"> 发送get请求</button>
+    <script>
+        // let url='http://localhost:5000';
+        
+        function getData(){
+            //get 无参数
+            $.get(url,function(data){
+                console.log(data);
+            });
+            
+            //get 有参数
+            // $.get(url,{username:"tom",pwd:"123456"},function(data){
+            //     console.log(data);
+            // },'json');
+        }
+    
+    </script>
+</body>
+</html>

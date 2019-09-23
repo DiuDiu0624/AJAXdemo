@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        input {
+            width: 200px;
+            height: 38px;
+            margin: 30px;
+            padding: 0 10px;
+            font-size: 16px;
+            float: left;
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin-left: 30px;
+            width: 50px;
+            height: 30px;
+            float: left;
+            margin-top: 30px;
+        }
+
+        ul {
+            width: 300px;
+            margin-left: 30px;
+            list-style: none;
+            clear: both;
+        }
+
+        li {
+            line-height: 30px;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <input type="text">
+    <button>搜索</button>
+    <ul></ul>
+    <script>
+        var ul = document.getElementsByTagName("ul")[0];
+        var input = document.getElementsByTagName("input")[0];
+        input.onkeyup = function () {
+            ul.innerHTML = "";
+            let txtval = input.value.trim();
+            let url = `http://suggest.taobao.com/sug?code=utf-8&q=${txtval}&callback=cb`
+            let script = document.createElement("script")
+            script.src = url;
+            document.body.appendChild(script);
+        }
+        function cb(data) {
+            console.log(data);
+            let txtval = input.value.trim();
+            for (var i = 0; i < data.result.length; i++) {
+                // 文本框为空时，不添加li
+                if (txtval.trim() == "") {
+                    break;
+                }else{
+                    add(data,i);
+                }
+            }
+        }
+
+            function add(data,i) {
+                var li = document.createElement("li")
+                li.innerHTML = data.result[i][0];
+                ul.appendChild(li);
+            }
+    </script>
+</body>
+
+</html>

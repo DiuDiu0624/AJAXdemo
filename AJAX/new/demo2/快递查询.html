@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../JS/jquery.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 600px;
+            margin: 100px;
+        }
+
+        select {
+            height: 30px;
+            margin-right: 10px;
+            outline: none;
+        }
+
+        input {
+            width: 300px;
+            height: 30px;
+            padding: 0 8px;
+        }
+
+        button {
+            height: 30px;
+            width: 80px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <select name="" id="txt-select">
+            <option value="shunfeng" selected>顺丰</option>
+            <option value="yunda">韵达</option>
+            <option value="shentong">申通</option>
+        </select>
+        <input type="text" id="txt-input">
+        <button>查询</button>
+    </div>
+    <script>
+        let btn = document.getElementsByTagName("button")[0];
+        btn.onclick = function () {
+            let select1 = document.getElementById("txt-select");
+            let select2 = select1.value;
+            let input = document.getElementById("txt-input");
+            let input2 = input.value;
+           // let url = 'https://sp0.baidu.com/9_Q4sjW91Qh3otqbppnN2DJv/pae/channel/data/asyncqury?cb=?';
+            $.ajax({
+                url: "https://sp0.baidu.com/9_Q4sjW91Qh3otqbppnN2DJv/pae/channel/data/asyncqury?cb=?",
+                type: "GET",
+                data: { com: select2, nu: input2, appid: 4001 },
+                dataType:"json",
+                success: function (data) {
+                    console.log(data)
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

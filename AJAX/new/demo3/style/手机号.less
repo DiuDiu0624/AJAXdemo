@@ -1,0 +1,53 @@
+.all {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    .all;
+}
+
+@wid: 200px;
+
+.ul {
+    list-style: none;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.comm {
+    width: @wid;
+    .center;
+    margin-top: @wid - 100;
+}
+
+.til {
+    .comm;
+
+    button {
+        width: @wid - 150;
+        margin-top: @wid - 180;
+    }
+
+    input {
+        width: @wid - 50;
+        padding-left: 5px;
+        margin-top: @wid - 180;
+    }
+}
+
+.bom {
+    .comm;
+    margin-top: @wid - 180;
+    height: @wid;
+   
+ ul{
+     .ul;
+     li{
+         padding-left: 10px;
+         margin-top: 8px;
+     }
+ }
+}

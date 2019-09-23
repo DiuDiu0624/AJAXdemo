@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/new.css">
+    <script src="../../JS/jquery.js"></script>
+    <script src="../../JS/axios.min.js"></script>
+    <style>
+        .right {
+            overflow: hidden;
+        }
+
+        .right ul {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="left">
+        <ul>
+            <li class="top">头条</li>
+            <li class="shehui">社会</li>
+            <li class="guonei">国内</li>
+            <li class="guoji">国际</li>
+            <li class="yule">娱乐</li>
+            <li class="tiyu">体育</li>
+            <li class="junshi">军事</li>
+            <li class="keji">科技</li>
+            <li class="caijing">财经</li>
+            <li class="shishang">时尚</li>
+        </ul>
+    </div>
+    <div class="right">
+        <ul id="ri">
+           
+        </ul>
+    </div>
+    <script>
+        var oul = document.querySelector("#ri");
+        axios({
+                method: "get",
+                url: `http://localhost:8088?myUrl=http://v.juhe.cn/toutiao/index?type=top&key=7ab580a7e252a3cba5463093745ec5ba`
+            })
+                .then(data => {
+                    console.log(data);
+                    var datas = data.data.result;
+                    console.log(datas.data)
+                    for (i in datas.data) {
+
+                        // console.log(datas.data[1].author_name)
+                        var lis = document.createElement("li");
+                        var h2 = document.createElement("h2");
+                        h2.innerHTML = datas.data[i].author_name;
+                        var span = document.createElement("span");
+                        span.innerHTML = datas.data[i].date;
+                        var p = document.createElement("p");
+                        p.innerHTML = datas.data[i].title;
+                        var pic = document.createElement("img");
+                        pic.src = datas.data[i].thumbnail_pic_s;
+
+                        var a = document.createElement("a");
+                        a.href = datas.data[i].url;
+                        a.innerHTML = "点击链接查看详情>>>"
+                        lis.appendChild(pic);
+                        lis.appendChild(h2);
+                        lis.appendChild(span);
+                        lis.appendChild(p);
+                        lis.appendChild(a);
+                        oul.appendChild(lis);
+                    }
+                })
+
+        $("li").click(function () {
+
+            oul.innerHTML = "";
+            $txt = $(this).prop("className");
+            console.log($txt);
+            axios({
+                method: "get",
+                url: `http://localhost:8088?myUrl=http://v.juhe.cn/toutiao/index?type=${$txt}&key=7ab580a7e252a3cba5463093745ec5ba`
+            })
+                .then(data => {
+                    console.log(data);
+                    var datas = data.data.result;
+                    console.log(datas.data)
+                    for (i in datas.data) {
+
+                        // console.log(datas.data[1].author_name)
+                        var lis = document.createElement("li");
+                        var h2 = document.createElement("h2");
+                        h2.innerHTML = datas.data[i].author_name;
+                        var span = document.createElement("span");
+                        span.innerHTML = datas.data[i].date;
+                        var p = document.createElement("p");
+                        p.innerHTML = datas.data[i].title;
+                        var pic = document.createElement("img");
+                        pic.src = datas.data[i].thumbnail_pic_s;
+
+                        var a = document.createElement("a");
+                        a.href = datas.data[i].url;
+                        a.innerHTML = "点击链接查看详情>>>"
+                        lis.appendChild(pic);
+                        lis.appendChild(h2);
+                        lis.appendChild(span);
+                        lis.appendChild(p);
+                        lis.appendChild(a);
+                        oul.appendChild(lis);
+                    }
+                })
+            //   $.ajax({
+            //     type: "GET",
+            //         url: "http://v.juhe.cn/toutiao/index",
+            //         data: { type: `${$txt}`, key: '7ab580a7e252a3cba5463093745ec5ba' },
+            //         dataType: "jsonp",
+            //         success: function (msg) {
+            //             console.log(msg)
+            //         }
+            //   })
+        })
+    </script>
+</body>
+
+</html>
